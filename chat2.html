@@ -32,6 +32,7 @@
     h1 {
       font-size: 1.5em;
       font-weight: 600;
+      width: 100vw;
     }
 
     #app {
@@ -47,6 +48,7 @@
       padding: 0px;
       overflow-y: auto;
       overflow-x: hidden;
+      width: 100vw;
     }
 
     .app-header {
@@ -58,6 +60,8 @@
       box-shadow: 0 3px 10px 1px rgba(55, 30, 60, 0.5);
       border-bottom: 2px solid rgba(223, 216, 224, 0.3);
       border-bottom: 1px solid rgba(60, 25, 65, 0.657);
+      width: 100%;
+
     }
 
     .title {
@@ -76,17 +80,19 @@
       overflow-y: auto;
       overflow-x: hidden;
       padding: 12px 10px 0px 10px;
+      width: 100vw;
     }
 
     .contentContainer {
       margin: 0;
+      width: 100vw;
     }
 
     .formContainer {
       position: absolute;
       bottom: 0;
       left: 0;
-      width: 97%;
+      /* width: 97%; */
       height: fit-content;
       padding: 15px;
       margin: 4px;
@@ -118,6 +124,7 @@
     .textInput {
       padding: 3px;
       margin: 5px 0px 10px 0px;
+      background: white;
     }
 
     .submitButton {
@@ -134,7 +141,7 @@
       background: rgba(60, 35, 80, 0.6);
       border-radius: 3px;
       width: 100%;
-      max-width: 330px;
+      /* max-width: 330px; */
       margin: auto;
     }
   </style>
@@ -144,7 +151,8 @@
 <script>
   const socket = io();
   const setUsername = () => {
-    socket.emit('setUsername', document.getElementById('name').value);
+    socket.emit('setUsername', document.querySelector('.textInput').value);
+    document.querySelector('.textInput').value = '';
   };
 
   let user;
@@ -154,23 +162,37 @@
 
   socket.on('userSet', function (data) {
     user = data.username;
-    document.body.innerHTML = `
-      <input type="text" id="message">
-        <button type="button" name="button" onclick="sendMessage()">Send</button>
-        <div id="message-container">
-      </div>`;
+
+    // let btn = document.querySelector('.submitButton');
+    // btn.textContent = 'Send';
+    // btn.addEventListener('click', e => {
+    //   // e.preventDefault();
+    //   // e.stopPropagation();
+    //   sendMessage();
+    // })
+    let textIn = document.querySelector('.textInput')
+    textIn.classList.add('message')
+    // document.querySelector('.userform').innerHTML = `
+    //   <input type="text" class="submitButton" id="message">
+    //     <button type="button" class="textInput" name="button" onclick="sendMessage()">Send</button>
+    //     <div id="message-container">
+    //   </div>`;
+    document.querySelector('.button-container').innerHTML = `
+        <button type="button" class="textInput" name="button" onclick="sendMessage()">Send</button>
+      `;
   });
 
   const sendMessage = () => {
-    var msg = document.getElementById('message').value;
+    var msg = document.querySelector('.message').value;
     if (msg) {
       socket.emit('msg', { message: msg, user: user });
     }
+    document.querySelector('.message').value = '';
   }
 
   socket.on('newmsg', data => {
     if (user) {
-      document.getElementById('message-container').innerHTML += `
+      document.querySelector('.contentContainer').innerHTML += `
       <div><b>${data.user} </b>: ${data.message}</div>
       `;
     }
@@ -189,19 +211,21 @@
 
     <div class="appBody">
       <div class="contentContainer">
+
       </div>
 
     </div>
     <div class="formContainer">
       <p class="subtitle">Stick your name in that and then chat in it too.</p>
-      <form class="userform">
+      <div class="userform">
         <input id="name" type="text" class="textInput" name="name" value="" placeholder="Enter your name!">
-        <button type="button" class="submitButton" name="button" onclick="setUsername()">Let me chat!</button>
-
+        <div class="button-container">
+          <button type="button" class="submitButton" name="button" onclick="setUsername()">Let me chat!</button>
+        </div>
         <div class="selectContainer">
           <!-- <v-select label="COUNTRY" :options="options"></v-select> -->
         </div>
-      </form>
+      </div>
     </div>
   </div>
   <!-- Project -->

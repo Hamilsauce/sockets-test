@@ -162,19 +162,22 @@
     user = data.username;
 
     let btn = document.querySelector('.submitButton');
-    btn.textContent =
-      btn.addEventListener('click', e => {
-        // e.preventDefault();
-        // e.stopPropagation();
-        sendMessage();
-      })
-    let textIn = document.querySelector('.textInput')
+    btn.textContent = 
+    btn.addEventListener('click', e => {
+      e.preventDefault();
+      e.stopPropagation();
+      sendMessage();
+    })
+    let textIn = document.querySelector('.textInpit')
     textIn.classList.add('message')
-    // document.querySelector('.userform').innerHTML += `
-    //   <input type="text" class="submitButton" id="message">
-    //     <button type="button" class="textInput" name="button" onclick="sendMessage()">Send</button>
-    //     <div id="message-container">
-    //   </div>`;
+
+
+
+    document.querySelector('.userform').innerHTML += `
+      <input type="text"class="textInput" id="message">
+        <button type="button" name="button" class="submitButton"  onclick="sendMessage()">Send</button>
+        <div id="message-container">
+      </div>`;
   });
 
   const sendMessage = () => {
