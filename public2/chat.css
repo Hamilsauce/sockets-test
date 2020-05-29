@@ -1,0 +1,42 @@
+* {
+  box-sizing: border-box;
+  padding: 0;
+  margin: 0;
+}
+
+.app {
+  background: #9092A275;
+  width: 100%;
+  height: 100vh;
+  padding: 10px;
+  margin: auto;
+}
+
+.container-top {
+  display: flex;
+  flex-direction: row;
+}
+
+.control-group {
+  display: flex;
+  flex-direction: column;
+}
+
+.control-label {}
+
+.nameSpaceInput {
+  padding: 5px;
+  font-size: 1.1em;
+  max-width: 250px;
+}
+
+.submitBtn {
+  width: auto;
+  margin: auto auto 0px auto;
+  padding: 5px;
+  font-size: 1.1em;
+}
+
+.dataOut {
+  padding: 10px;
+}

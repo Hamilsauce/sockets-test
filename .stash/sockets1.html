@@ -21,32 +21,32 @@
     <div class="dataOut"></div>
   </div>
   <script>
-  //const submitBtn =  document.querySelector('.submitBtn')
-  //const nameSpaceInput =  document.querySelector('.nameSpaceInput')
-//  let nspace = nameSpaceInput.value
-  const dataOut =  document.querySelector('.dataOut')
-  let result = ''; 
+    //const submitBtn =  document.querySelector('.submitBtn')
+    //const nameSpaceInput =  document.querySelector('.nameSpaceInput')
+    //  let nspace = nameSpaceInput.value
+    const dataOut = document.querySelector('.dataOut')
+    let result = '';
 
 
-  const connectToSocket = nsp => {
-//    dataOut.textContent = 'in conn funct'
-//submitBtn.value = 'done'
+    const connectToSocket = nsp => {
+      //    dataOut.textContent = 'in conn funct'
+      //submitBtn.value = 'done'
 
 
 
-    var socket = io();
-    socket.on('connectToRoom', data => {
-    	result = data;
-	 dataOut.textContent = result;
+      var socket = io();
+      socket.on('connectToRoom', data => {
+        result = data;
+        dataOut.textContent = result;
 
-//         nameSpaceInput.value = result;;
-     });  
-}
-connectToSocket('space1');
-  
+        //         nameSpaceInput.value = result;;
+      });
+    }
+    connectToSocket('space1');
+
 //submitBtn.addEventListener('click', e => {
  //	connectToSocket(nspace)
-//  })  
+//  })
   </script>
 </body>
 
