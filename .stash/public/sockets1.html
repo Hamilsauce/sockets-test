@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <link rel="stylesheet" href="./sockets1.css" type="text/css" media="all" />
+  <title>sockets</title>
+</head>
+<script src="/socket.io/socket.io.js"></script>
+
+<body>
+  <div class="app">
+    <div class="container-top">
+      <div class="control-group">
+        <label class="control-label" for="nameSpaceInput">Enter destination</label>
+        <input type="text" name="nameSpaceInput" class="nameSpaceInput" id="nameSpaceInput" value="" />
+      </div>
+      <input type="button" name="submitBtn" class="submitBtn" id="submitBtn" value="Submit" />
+    </div>
+    <div class="dataOut"></div>
+  </div>
+  <script>
+  const submitBtn =  document.querySelector('.submitBtn')
+  const nameSpaceInput =  document.querySelector('.nameSpaceInput')
+  let nspace = nameSpaceInput.value
+  const dataOut =  document.querySelector('.dataOut')
+  let result = ''; 
+
+
+  const connectToSocket = nsp => {
+    dataOut.textContent = 'in conn funct'
+submitBtn.value = 'done'
+
+    var socket = io(`/${nsp}`);
+    socket.on('hi', data => {
+    	result = data;
+	 dataOut.textContent = data;
+
+         nameSpaceInput.value = result || 'result was falsey';
+     });  
+}
+connectToSocket('space1');
+  
+//submitBtn.addEventListener('click', e => {
+ //	connectToSocket(nspace)
+//  })  
+  </script>
+</body>
+
+</html>
